@@ -1,17 +1,16 @@
 'use strict';
 
-const repoSelector = document.querySelector('#repoSelect');
-const contribDiv = document.querySelector('#contributorsDiv');
-const repoDiv = document.querySelector('#repo');
-
-const HYF_REPOS_URL = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
-
 //fetch the data from the URL and convert to json
 // create the select element and populate with options. These should be the name of the repos in the json.
 // when the user changes the selector go to the URL for that repo and get the json
 // create a ul showing relevant data
 // go to the URL of each contributor in the repo and fetch the data
 // create a ul showing relevant data
+
+const repoSelector = document.querySelector('#repoSelect');
+const contribDiv = document.querySelector('#contributorsDiv');
+const repoDiv = document.querySelector('#repo');
+const HYF_REPOS_URL = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 
 
 function createAndAppend(name, parent, options = {}) {
@@ -34,7 +33,7 @@ function buildSelect(data, repoSelector) {
     .sort()
     .forEach(name => {
       createAndAppend('OPTION', repoSelector, { text: name, value: name });
-    });
+    })
 }
 
 function main(url) {
@@ -47,47 +46,36 @@ function main(url) {
     .then(response => response.json())
     .then(json => buildSelect(json, repoSelector))
     .catch(error => createAndAppend('div', root, { text: error, class: 'alert-error' }))
+
+  const selectElement = document.querySelector('.selector');
+
+  selectElement.addEventListener('change', event => {
+    let repo = document.getElementById('repoSelect').value;
+    let repoURL = `https://api.github.com/repos/HackYourFuture/${repo}`;
+    let contribURL = `https://api.github.com/repos/HackYourFuture/${repo}/contributors`;
+
+    displayPage(repoURL, contribURL);
+
+  })
+
 }
 
-
-//ul contribDiv
-
 function displayContrib(contributor, contributions, avatar) {
-
-  // createAndAppend(ul, contribDiv, { id = })
   let eachPersonUl = createAndAppend('ul', contribDiv)
-
   createAndAppend('IMG', eachPersonUl, { src: avatar, width: "42", id: 'avatar' })
-
   createAndAppend('li', eachPersonUl, { class: "badge", id: 'contbadge', text: `${contributions}` })
   createAndAppend('li', eachPersonUl, { text: `${contributor}` })
-  // createAndAppend('li', eachPersonUl, { text: `Contributions: ${contributions}`, id: 'contributionNumber' })
-
 }
 
 function displayRepo(repository, description, forks, updated) {
-
   let eachRepoUl = createAndAppend('ul', repoDiv)
-
-
   createAndAppend('li', eachRepoUl, { text: `Repository: ${repository}` })
   createAndAppend('li', eachRepoUl, { text: `Description: ${description}` })
   createAndAppend('li', eachRepoUl, { text: `Forks: ${forks}` })
   createAndAppend('li', eachRepoUl, { text: `Updated: ${updated}` })
-
-
 }
 
-const selectElement = document.querySelector('.selector');
-
-selectElement.addEventListener('change', event => {
-  const result = document.querySelector('.result');
-  let repo = document.getElementById('repoSelect').value;
-  let repoURL = `https://api.github.com/repos/HackYourFuture/${repo}`;
-  let contribURL = `https://api.github.com/repos/HackYourFuture/${repo}/contributors`;
-
-  main(HYF_REPOS_URL);
-
+function displayPage(repoURL, contribURL) {
   fetch(repoURL)
     .then(response => {
       if (response.ok) return response
@@ -118,10 +106,9 @@ selectElement.addEventListener('change', event => {
         let avatar = object.avatar_url;
         displayContrib(contributor, contributions, avatar);
       });
-      console.log('Here is the contribdata');
     })
     .catch(error => createAndAppend('div', root, { text: error, class: 'alert-error' }))
-})
+}
 
 
 
