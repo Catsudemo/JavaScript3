@@ -28,8 +28,10 @@ function createAndAppend(name, parent, options = {}) {
 }
 
 function buildSelect(data, repoSelector) {
+
   data
     .map(repo => repo.name)
+    .map(repo => repo.toUpperCase())
     .sort()
     .forEach(name => {
       createAndAppend('OPTION', repoSelector, { text: name, value: name });
@@ -44,6 +46,7 @@ function main(url) {
       throw new Error(response.statusText)
     })
     .then(response => response.json())
+    .then(repoSelector.innerHTML = '')
     .then(json => buildSelect(json, repoSelector))
     .catch(error => createAndAppend('div', root, { text: error, class: 'alert-error' }))
 

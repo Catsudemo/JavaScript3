@@ -45,13 +45,6 @@
   color: #444;
 }
 
-#contributorsDiv.li {
-  text-align: center;
-  padding: 10px;
-  margin: auto;
-  display: inline;
-}
-
 #contributorsDiv.IMG {
   padding: 20px;
   margin: 20px;
@@ -74,12 +67,6 @@
   padding: 20px;
   margin: 20px;
 }
-
-/* #contributionNumber {
-  text-align: right;
-  color: white;
-  background-color: grey;
-} */
 
 ul {
   list-style-type: none;
