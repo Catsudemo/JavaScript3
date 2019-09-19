@@ -3,24 +3,25 @@
 /* global Util */
 
 // eslint-disable-next-line no-unused-vars
-const repoDiv = document.querySelector('#repo');
-
 class Repository {
-  constructor(name, description, forks, updated, liveDiv) {
-    this.name = name;
-    this.description = description;
-    this.forks = forks;
-    this.updated = updated;
-    this.container = liveDiv;
+  constructor(repository) {
+    this.repository = repository;
   }
 
   /**
    * Render the repository info to the DOM.
    * @param {HTMLElement} container The container element in which to render the repository.
    */
-  render(repoDiv) {
-    // TODO: replace the next line with your code.
-    Util.createAndAppend('ul', repoDiv, JSON.stringify(this.repository, null, 2));
+  render(container) {
+    const updated = this.repository.updated_at.split('T')[0]
+    const created = this.repository.created_at.split('T')[0]
+    App.clearContainer(container);
+    Util.createAndAppend('h3', container, { text: this.name() });
+    const detailsUL = Util.createAndAppend('ul', container, { id: 'detailsList' });
+    Util.createAndAppend('li', detailsUL, { text: `Forks: ${this.repository.forks}` });
+    Util.createAndAppend('li', detailsUL, { text: `Description: ${this.repository.description}` });
+    Util.createAndAppend('li', detailsUL, { text: 'Created: ' + created });
+    Util.createAndAppend('li', detailsUL, { text: 'Last updated: ' + updated });
   }
 
   /**

@@ -6,14 +6,22 @@
 class Contributor {
   constructor(contributor) {
     this.contributor = contributor;
-    this.contributions = contributions;
-    this.avatar = avatar;
-    this.prototype.attach = function displayContrib(contributor, contributions, avatar) {
-      const contribDiv = document.querySelector('#contributorsDiv');
-      const eachPersonUl = createAndAppend('ul', contribDiv)
-      createAndAppend('li', eachPersonUl, { src: avatar, width: "42", id: 'avatar' })
-      createAndAppend('li', eachPersonUl, { class: "badge", id: 'contbadge', text: `${contributions}` })
-      createAndAppend('li', eachPersonUl, { text: `${contributor}` })
-    }
   }
+
+  name() {
+    return this.contributor.login;
+  }
+  /**
+   * Render the contributor info to the DOM.
+   * @param {HTMLElement} container The container element in which to render the contributor.
+   */
+  render(container) {
+    const contributorDiv = Util.createAndAppend('div', container, { id: 'contribDiv' });
+    const contributorList = Util.createAndAppend('ul', contributorDiv, { id: 'contribList' });
+    Util.createAndAppend('ul', contributorDiv, { id: + this.name() });
+    Util.createAndAppend('li', contributorList, { text: 'Name: ' + this.name() });
+    Util.createAndAppend('li', contributorList, { text: 'Contributions: ' + this.contributor.contributions });
+    Util.createAndAppend('IMG', contributorDiv, { src: this.contributor.avatar_url, id: `${this.name()}Avatar` });
+  }
+
 }

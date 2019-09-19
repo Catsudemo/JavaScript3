@@ -12,21 +12,45 @@ class App {
    * @param {string} url The GitHub URL for obtaining the organization's repositories.
    */
   async initialize(url) {
+    this.makeDomElements()
+
+
+
     // Add code here to initialize your app
     // 1. Create the fixed HTML elements of your page
     // 2. Make an initial XMLHttpRequest using Util.fetchJSON() to populate your <select> element
 
-    const root = document.getElementById('root');
-
-    Util.createAndAppend('h1', root, { text: 'It works!' }); // TODO: replace with your own code
 
     try {
       const repos = await Util.fetchJSON(url);
       this.repos = repos.map(repo => new Repository(repo));
-      // TODO: add your own code here
+      this.addReposToSelectElement()
     } catch (error) {
       this.renderError(error);
     }
+  }
+
+  makeDomElements() {
+    const root = document.getElementById('root');
+    let header = Util.createAndAppend('div', root, { class: 'header' });
+    Util.createAndAppend('select', header, { id: 'repoSelector' });
+    Util.createAndAppend('div', root, { id: 'container', class: 'flex-wrapper' });
+    // Util.createAndAppend('div', root, { id: 'repoInfo' });
+    // Util.createAndAppend('div', root, { id: 'repoContributors' });
+  }
+
+  addReposToSelectElement() {
+    const selectorElement = document.getElementById('repoSelector');
+    for (const repo of this.repos) {
+      Util.createAndAppend('option', selectorElement, { text: repo.name() });
+    }
+    selectorElement.addEventListener('change', event => {
+      const repoName = event.target.value;
+      const chosenRepo = this.repos.filter(repo => repo.name() === repoName)[0];
+      this.fetchContributorsAndRender(chosenRepo)
+
+    })
+
   }
 
   /**
@@ -44,16 +68,16 @@ class App {
    * repo and its contributors as HTML elements in the DOM.
    * @param {number} index The array index of the repository.
    */
-  async fetchContributorsAndRender(index) {
+  async fetchContributorsAndRender(chosenRepo) {
     try {
-      const repo = this.repos[index];
+      const repo = chosenRepo;
       const contributors = await repo.fetchContributors();
 
-      const container = document.getElementById('container');
+      const bigContainer = document.getElementById('container');
       App.clearContainer(container);
 
-      const leftDiv = Util.createAndAppend('div', container);
-      const rightDiv = Util.createAndAppend('div', container);
+      const leftDiv = Util.createAndAppend('div', bigContainer, { id: 'repoInfo' });
+      const rightDiv = Util.createAndAppend('div', bigContainer, { id: 'repoContributors' });
 
       const contributorList = Util.createAndAppend('ul', rightDiv);
 
