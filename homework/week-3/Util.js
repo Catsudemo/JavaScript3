@@ -1,6 +1,5 @@
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
 class Util {
   static createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);

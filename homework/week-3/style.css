@@ -1,82 +1,118 @@
-.alert-error {
-    color: red;
-}
-
 .header {
-    background-color: #176ab0;
-    color: white;
-    text-align: center;
-    padding: 5px;
+  background-color: #176ab0;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  width: 100vw;
 }
 
 #main-content {
-    width: 350px;
-    float: left;
-    padding: 10px;
+  float: left;
+  padding: 10px;
 }
 
-.footer {
-    background-color: #176ab0;
-    color: white;
-    clear: both;
-    text-align: center;
-    padding: 5px;
+#footer {
+  background-color: #176ab0;
+  color: white;
+  clear: both;
+  text-align: center;
+  padding: 5px;
+}
+
+.badge {
+  background: grey;
+  float: right;
+  color: white;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  padding: 10px;
 }
 
 .flex-wrapper {
-    font-family: Abel;
-    text-align: left;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    font-size: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: #2E2C2F;
-    color: #444;
+  font-family: Abel;
+  width: 100vh;
+  background-color: grey;
+  text-align: left;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #2E2C2F;
+  color: #444;
 }
 
-#repoInfo {
-    background-color: whitesmoke;
-    border-color: #2E2C2F;
-    width: 40%;
-    border: 5px;
-    padding: 20px;
-    margin: 20px;
+IMG {
+  padding: 20px;
+  margin: 20px;
+  width: 250px;
+  border-radius: 50%;
+  background-color: whitesmoke;
+}
+
+#container {
+  background-color: black;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 #repoContributors {
-    background-color: whitesmoke;
-    border-color: #2E2C2F;
-    width: 40%;
-    border: 5px;
-    padding: 20px;
-    margin: 20px;
+  background-color: #2E2C2F;
+}
+
+#repoInfo {
+  background-color: #2E2C2F;
+}
+
+#repoInnerContainer {
+  background-color: whitesmoke;
+  border-color: #2E2C2F;
+  width: 50%;
+  border: 5px;
+  padding: 20px;
+  margin: 20px;
+  margin-left: 20%;
+  margin-top: 50px;
+}
+
+#repo {
+  background-color: green;
+  border-color: #2E2C2F;
+  width: 20%;
+  border: 5px;
+  padding: 20px;
+  padding-left: 10%;
+  margin: 20px;
+}
+
+#contribDiv {
+  background-color: whitesmoke;
+  border-color: #2E2C2F;
+  width: 50%;
+  border: 5px;
+  padding: 20px;
+  margin: 20px;
 }
 
 ul {
-    list-style-type: none;
-    padding: 10px;
-}
-
-li {
-    padding: 8px;
-}
-
-img {
-    width: 80px;
-    height: auto;
+  list-style-type: none;
+  padding: 10px;
 }
 
 @media screen and (max-width: 600px) {
-    .flex-wrapper {
-        -webkit-flex-direction: column;
-        flex-direction: column;
-    }
-    #repo {
-        width: 80%;
-    }
-    #contribDiv {
-        width: 80%;
-    }
+  .flex-wrapper {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+  #repo {
+    width: 80%;
+  }
+  #contribDiv {
+    width: 80%;
+  }
 }
