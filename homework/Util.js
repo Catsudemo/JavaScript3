@@ -17,6 +17,7 @@ class Util {
   }
 
   static fetchJSON(url) {
+
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
