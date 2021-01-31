@@ -1,6 +1,5 @@
 'use strict';
 
-// eslint-disable-next-line no-unused-vars
 class Util {
   static createAndAppend(name, parent, options = {}) {
     const elem = document.createElement(name);
@@ -17,7 +16,6 @@ class Util {
   }
 
   static fetchJSON(url) {
-
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);

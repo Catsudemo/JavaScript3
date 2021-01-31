@@ -128,6 +128,7 @@ selectElement.addEventListener('change', event => {
         let contributor = object.login;
         let contributions = object.contributions;
         let avatar = object.avatar_url;
+        console.lo
         displayContrib(contributor, contributions, avatar);
       });
       console.log('Here is the contribdata');

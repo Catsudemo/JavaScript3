@@ -18,5 +18,14 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "prettier": "^1.15.2"
-  }
+  },
+  "main": "prettier.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Catsudemo/JavaScript3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Catsudemo/JavaScript3/issues"
+  },
+  "homepage": "https://github.com/Catsudemo/JavaScript3#readme"
 }
